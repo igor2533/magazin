@@ -12,6 +12,7 @@ use app\models\ContactForm;
 use app\models\Products;
 use yii\data\Pagination;
 
+
 class SiteController extends Controller
 {
     /**
@@ -72,10 +73,12 @@ class SiteController extends Controller
      * @return Response|string
      */
 
-public function actionProduct(){
+public function actionProduct($id){
 
- $query = Products::find();
+ $product = Products::findOne($id);
 
+ return $this->render('product',
+['product'=> $product]);
 
 }
 
@@ -83,7 +86,7 @@ public function actionProduct(){
 
  $query = Products::find();
  $pagination = new Pagination([
-            'defaultPageSize' => 2,
+            'defaultPageSize' => 5,
             'totalCount' => $query->count(),
         ]);
 
